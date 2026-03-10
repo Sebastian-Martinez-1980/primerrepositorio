@@ -1,12 +1,20 @@
-import { EventEmitter } from 'events'; 
+import fs from 'fs'; 
 
-// Crear una instancia de EventEmitter 
-const emisor = new EventEmitter(); 
+// Leer un archivo de manera asíncrona 
+fs.readFile('./data/example.txt', 'utf8', (err, data) => { 
+    if (err) throw err; 
+    console.log('Contenido del archivo:', data);
+}); 
+ 
 
-// Definir un evento personalizado 
-emisor.on('saludo', (nombre) => { 
-    console.log(`¡Hola, ${nombre}!`);
-});  
+// Escribir en un nuevo archivo 
+fs.writeFile('./data/newfile.txt', 'Contenido nuevo', (err) => { 
+    if (err) throw err; 
+    console.log('Archivo creado y escrito'); 
+});
 
-// Emitir el evento 'saludo' 
-emisor.emit ('saludo', 'Mundo');
+// Renombrar un archivo 
+fs.rename('./data/newfile.txt', './data/renamedfile.txt'), (err) => {
+    if (err) throw err;
+    console.log('Archivo renombrado');
+};
